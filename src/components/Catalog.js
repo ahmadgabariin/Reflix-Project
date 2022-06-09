@@ -1,6 +1,8 @@
 import React, { useState } from 'react'
 import { useLocation } from 'react-router-dom'
 import Movie from './Movie'
+import SearchCatalog from './SearchCatalog'
+import UserMovies from './UserMovies'
 
 
 export function Catalog (props) {
@@ -17,6 +19,7 @@ export function Catalog (props) {
       { id: 3, isRented: false, title: "The Sword in the Stone", year: 1963, img: "https://www.disneyinfo.nl/images/laserdiscs/229-1-AS-front.jpg", descrShort: "Arthur is a young boy who just wants to be a knight's squire. Alas, he is dubbed 'Wart' early on, and it was all downhill from there for a while. On a hunting trip he falls in on Merlin, literally. Merlin is a possibly-mentally-unstable-and-ethically-dubious Wizard that turns Arthur into a literate, at-one-point harassed squirrel. Watch to find out what the heck that means." },
       { id: 4, isRented: false, title: "Beauty and the Beast", year: 2016, img: "https://images-na.ssl-images-amazon.com/images/I/51ArFYSFGJL.jpg", descrShort: "Basically the same as the original, except now Hermi-- Emma Wattson plays Belle, fittingly so some would say, given how actively progressive she is regarding women's rights. Rumor has it that in the bonus scenes she whips out a wand and turns Gaston into a toad, but in order to watch those scenes you need to recite a certain incantation." }
     ])
+  const showUserMovie = Object.keys(user.movies).length > 0 ? true : false
   
     if (userID != undefined){
       return (
@@ -26,27 +29,22 @@ export function Catalog (props) {
               <input className='search-input' placeholder='Search' onChange={search} value = {searchText}></input>
               <span className='budget-text'>Budget: $<span className='budget-value'>{user.budget}</span></span>
             </div> 
-
-            if({searchText != ``}) {
-              <div>awd</div>
-            }
-
-            <div>
-              {Object.keys(user.movies).length > 0 ? <div className='catalog-title'>My Movies : </div> : ``}
-              <div className='movies'>
-                { movies.map(movie => {
-                  if (user.movies[movie.id])
-                  {
-                    return <MovieComponent key={movie.id}  {...movie} />
-                  }
-                }) }
-              </div>
-            </div>
+          { searchText
+           ?<SearchCatalog movies = {movies} user = {user} addMovie={addMovie} removeMovie = {removeMovie} movieName = {searchText}/>
+           : console.log(`no`)
+           }
+          
+          {showUserMovie 
+          ? <UserMovies movies = {movies} user = {user} addMovie={addMovie} removeMovie = {removeMovie} />
+          :``}
 
             <div>
               <div className='catalog-title'>Catalog : </div>
               <div className='movies'>
-                { movies.map(movie => <MovieComponent key={movie.id} {...movie} />) }
+                { movies.map(movie => 
+                <Movie key={movie.id} movie = {movie} user = {user} addMovie={addMovie} isPurchased = {user.movies[movie.id]} 
+                removeMovie = {removeMovie} />
+                )}
               </div>
             </div>
             
@@ -60,14 +58,6 @@ export function Catalog (props) {
         <div className='no-user'>Please Select A User !</div>
       )
     }
-
-    function MovieComponent(props) {
-      return (
-        <Movie movie = {props} user = {user} addMovie={addMovie} isPurchased = {user.movies[props.id]} 
-        removeMovie = {removeMovie} />
-      )
-    }
-
     function search (event) {
       setSearchText(event.target.value)
     }
