@@ -128,6 +128,7 @@ body {
 }
 
 .catalog-header {
+  margin-top: 2vh;
   display: grid;
   grid-template-columns: repeat(2,1fr);
 }
@@ -211,14 +212,22 @@ a {
   position: relative;
 }
 .whole-move-div:hover {
-  padding: 1vw;
+  margin: 1vw;
 }
 
 .btn-movie {
   position: absolute;
-  display: flex;
   right: 0.5vw;
+  border-radius: 100%;
+  border: none;
+  width: 2vw;
+  font-size:2vw;
+  margin-top: 0.5vh;
+  display: grid;
+  justify-items: center;
 }
+
+
 
 ::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
   color: white;
@@ -235,4 +244,38 @@ a {
   width: 100%;
   display: flex;
   justify-content: flex-end;
+}
+
+
+.buy {
+  
+  color: white;
+  background: linear-gradient( 
+  rgb(0, 255, 64), 
+  rgb(125, 245, 123));
+}
+.remove {
+  background: linear-gradient( 
+    rgb(255, 0, 0), 
+    rgb(251, 87, 87));
+}
+
+.btn-movie:hover {
+  background-color: black;
+}
+
+.username-name {
+  margin-left: 3vw;
+  color: white;
+  font-size: x-large;
+}
+
+.user-name {
+  color: rgb(179, 17, 17);
+  text-shadow: 0 0 1vw #FF0000, 0 0 1vw #0000FF;
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+  margin-left: 1vw;
+}
+.user-name:hover {
+  font-size: xxx-large;
 }

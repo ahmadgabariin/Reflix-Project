@@ -11,8 +11,8 @@ export class Movie extends Component {
     const isPurchased = this.props.isPurchased
     return (
       <div className='whole-move-div'>
-        <button onClick={isPurchased ? this.removeMovie: this.addMovie}className={`btn-movie ${isPurchased?`Remove`:`Buy`}`}>
-        {isPurchased ? `Remove` : `Add`}</button>
+        <button onClick={isPurchased ? this.removeMovie: this.addMovie}className={`btn-movie  ${isPurchased?`remove`:`buy`}`}>
+        {isPurchased ? `-` : `+`}</button>
         <Link to={`/movies/${movie.id}`} state = {movie} >
           <div className='movie'>
             <img src = {`${movie.img}`} className ={`movies-img`} ></img>
