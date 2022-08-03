@@ -27,10 +27,10 @@ class App extends Component {
  })
 
  userAddMovie = (userID , movieID) => {
-  let movieCost = 20
+  const movieCost = 20
   let users = [... this.state.users]
   let user = users.find(user => user.id === userID)
-  if (! user.movies[movieID] && user.budget - movieCost >= 20) {
+  if (! user.movies[movieID] && user.budget  >= movieCost) {
     user.movies[movieID] = true
     user.budget = user.budget - movieCost
     this.setState({

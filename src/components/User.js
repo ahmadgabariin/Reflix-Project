@@ -11,7 +11,6 @@ export class User extends Component {
         backgroundColor: `${user.backgroudColor}`,
       };
     return (
-        
         <div className={`user`} >  
             <Link to ={`/catalog`} state = {{id : user.id}} onClick = {this.updateUser}
             className = {`link user`}  style = {myStyle}>
